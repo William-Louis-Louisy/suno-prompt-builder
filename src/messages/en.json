@@ -3,6 +3,68 @@
     "title": "Admin Page",
     "description": "If you see this page, you are logged in as an admin."
   },
+  "AboutPage": {
+    "meta": {
+      "title": "About",
+      "description": "What this app does, how it works, and how to use it with Suno."
+    },
+    "hero": {
+      "title": "Write better Suno-ready lyrics, faster",
+      "subtitle": "A lightweight workspace to structure lyrics, manage style/voice tags, and export clean text you can paste into Suno."
+    },
+    "sections": {
+      "what": {
+        "title": "What is this app?",
+        "p1": "This app helps you write and structure song lyrics specifically for Suno workflows. It keeps your sections clean (Intro / Verse / Chorus…), lets you annotate sections (e.g. “[Intro - Violin solo]”), and generates a paste-ready export.",
+        "p2": "It focuses on speed and clarity: no clutter, no unnecessary fields, just the inputs that matter for iterative prompting."
+      },
+      "how": {
+        "title": "How to use it",
+        "steps": {
+          "buildStructure": "Build your structure, add sections, reorder them with drag & drop, duplicate a chorus when needed.",
+          "writeLyrics": "Write lyrics section by section, optionally adding a short instruction for a section tag.",
+          "addTags": "Add your Styles and Voice tags using autocomplete (press Enter or comma to confirm).",
+          "copyExports": "Copy the exports and paste them into Suno."
+        }
+      },
+      "roadmap": {
+        "title": "What’s next",
+        "items": [
+          "Multiple projects (save, load, rename)",
+          "Invited collaborators (shared projects)",
+          "AI-assisted rewriting and rhyme tooling",
+          "Version history and comparisons"
+        ]
+      }
+    }
+  },
+
+  "ExportBlock": {
+    "empty": "Empty.",
+    "copy": "Copy",
+    "copied": "Copied",
+    "ready": "Ready to paste into Suno."
+  },
+  "ExportPanel": {
+    "title": "Export",
+    "description": "Outputs — structured lyrics and tags.",
+    "copiedAll": "Copied all",
+    "copyAll": "Copy all",
+    "downloadTxt": "Download .txt",
+    "structuredLyrics": "Structured Lyrics",
+    "tags": "Tags (Styles + Voice)",
+    "advanced": "Advanced (Exclude styles + constraints)",
+    "clipboardBlocked": "Clipboard blocked — copy manually",
+    "ctrlC": "Select the text below and press Ctrl/Cmd+C.",
+    "close": "Close"
+  },
+
+  "FooterNavigation": {
+    "about": "About",
+    "suno": "Suno",
+    "wiki": "Wiki"
+  },
+
   "HomePage": {
     "title": "Next.js Craft Template",
     "description": "A template for Next.js projects that include Next-Auth, Next-Intl and TailwindCSS"
@@ -12,11 +74,79 @@
     "logout": "Logout",
     "login": "Login",
     "openUserMenu": "Open user menu",
-    "openMainMenu": "Open main menu"
+    "openMainMenu": "Open main menu",
+    "navigation": {
+      "home": "Home",
+      "about": "About",
+      "suno": "Suno"
+    }
   },
   "LocaleSwitch": {
     "label": "Change language",
-    "locale": "{locale, select, fr {🇫🇷} en {🇺🇸} other {Unknown}}"
+    "locale": "{locale, select, fr {français} en {english} es {español} zh {中文} ja {日本語} ko {한국어} other {Unknown}}"
+  },
+  "PageHeading": {
+    "titleLabel": "Title",
+    "titlePlaceholder": "Enter the title of your song",
+    "sections": "sections",
+    "copiedLyrics": "Copied lyrics",
+    "copiedTags": "Copied tags",
+    "copyLyrics": "Copy lyrics",
+    "copyTags": "Copy tags",
+    "download": "Download .txt",
+    "reset": "Reset",
+    "modal": {
+      "title": "Reset current project?",
+      "description": "This will clear the current lyrics, structure and tags. This action cannot be undone.",
+      "cancel": "Cancel",
+      "confirm": "Reset"
+    }
+  },
+  "SectionEditor": {
+    "title": "Section editor",
+    "preview": "Preview",
+    "type": "Type",
+    "instruction": "Instruction",
+    "instructionPlaceholder": "Violin solo / Whispered / No drums…",
+    "customLabel": "Custom label",
+    "customPlaceholder": "Drop / Breakdown / Post-chorus…",
+    "lyrics": "Lyrics",
+    "lyricsPlaceholder": "Write lyrics for this section…",
+    "lines": "lines",
+    "words": "words",
+    "clearLyrics": "Clear lyrics"
+  },
+  "SectionTypePicker": {
+    "intro": "Intro",
+    "verse": "Verse",
+    "prechorus": "Pre-Chorus",
+    "chorus": "Chorus",
+    "bridge": "Bridge",
+    "outro": "Outro",
+    "custom": "Custom"
+  },
+  "StructurePanel": {
+    "title": "Structure",
+    "description": "Drag to reorder • Click to edit • Duplicate for repeats",
+    "addSection": "Add section",
+    "duplicate": "Duplicate",
+    "delete": "Delete"
+  },
+  "StylesPanel": {
+    "title": "Styles",
+    "description": "Add style / genre / mood tags. Press <enter>Enter</enter> or <comma>,</comma> to add.",
+    "shuffle": "Shuffle",
+    "shuffleLabel": "Random suggestions",
+    "comboPlaceholder": "interesting, bass guitars, swedish rock, captivating…",
+    "noTags": "No tags yet."
+  },
+  "VoicePanel": {
+    "title": "Voice",
+    "description": "Voice setup: gender + descriptive voice tags.",
+    "gender": "Vocal Gender",
+    "comboLabel": "Voice tags",
+    "comboPlaceholder": "warm, breathy, intimate, light reverb…",
+    "noTags": "No tags yet."
   },
   "ThemeToggle": {
     "label": "Toggle theme",

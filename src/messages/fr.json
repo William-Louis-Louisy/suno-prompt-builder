@@ -1,26 +1,155 @@
 {
   "AdminPage": {
-    "title": "Page Administrateur",
-    "description": "Si vous voyez cette page, vous êtes connecté en tant qu'administrateur."
+    "title": "Page d’administration",
+    "description": "Si vous voyez cette page, vous êtes connecté en tant qu’administrateur."
   },
+  "AboutPage": {
+    "meta": {
+      "title": "À propos",
+      "description": "Ce que fait l’application, comment elle fonctionne et comment l’utiliser avec Suno."
+    },
+    "hero": {
+      "title": "Écrire des paroles prêtes pour Suno, plus vite",
+      "subtitle": "Un espace de travail léger pour structurer tes paroles, gérer les tags de style/voix, et exporter un texte propre à coller dans Suno."
+    },
+    "sections": {
+      "what": {
+        "title": "C’est quoi cette application ?",
+        "p1": "Cette application t’aide à écrire et structurer des paroles en pensant aux workflows Suno. Elle garde tes sections propres (Intro / Couplets / Refrain…), te permet d’annoter une section (ex. “[Intro - Violin solo]”), et génère un export prêt à coller.",
+        "p2": "L’objectif : vitesse et clarté. Pas de champs inutiles, juste ce qui compte pour itérer rapidement."
+      },
+      "how": {
+        "title": "Comment l’utiliser",
+        "steps": {
+          "buildStructure": "Construis la structure, ajoute des sections, réorganise-les en drag & drop, duplique un refrain si besoin.",
+          "writeLyrics": "Écris les paroles section par section, avec une instruction courte optionnelle pour la balise.",
+          "addTags": "Ajoute tes tags Styles et Voix via l’autocomplétion (Enter ou virgule pour valider).",
+          "copyExports": "Copie les exports et colle-les dans Suno."
+        }
+      },
+      "roadmap": {
+        "title": "Et ensuite ?",
+        "items": [
+          "Plusieurs projets (sauvegarder, charger, renommer)",
+          "Collaborateurs invités (projets partagés)",
+          "IA pour reformulation + outils de rimes",
+          "Historique de versions et comparaisons"
+        ]
+      }
+    }
+  },
+  "ExportBlock": {
+    "empty": "Vide.",
+    "copy": "Copier",
+    "copied": "Copié",
+    "ready": "Prêt à coller dans Suno."
+  },
+  "ExportPanel": {
+    "title": "Export",
+    "description": "Sorties — paroles structurées et tags.",
+    "copiedAll": "Tout copié",
+    "copyAll": "Tout copier",
+    "downloadTxt": "Télécharger .txt",
+    "structuredLyrics": "Paroles structurées",
+    "tags": "Tags (Styles + Voix)",
+    "advanced": "Avancé (Styles exclus + contraintes)",
+    "clipboardBlocked": "Presse-papiers bloqué — copiez manuellement",
+    "ctrlC": "Sélectionnez le texte ci-dessous puis appuyez sur Ctrl/Cmd+C.",
+    "close": "Fermer"
+  },
+
+  "FooterNavigation": {
+    "about": "À propos",
+    "suno": "Suno",
+    "wiki": "Wiki"
+  },
+
   "HomePage": {
-    "title": "Next.js Craft Template",
-    "description": "Un template pour les projets Next.js qui incluent Next-Auth, Next-Intl et TailwindCSS."
+    "title": "Template Craft Next.js",
+    "description": "Un template pour projets Next.js avec Next-Auth, Next-Intl et TailwindCSS"
   },
   "Header": {
     "hello": "Bonjour",
-    "logout": "Déconnexion",
+    "logout": "Se déconnecter",
     "login": "Se connecter",
     "openUserMenu": "Ouvrir le menu utilisateur",
-    "openMainMenu": "Ouvrir le menu principal"
+    "openMainMenu": "Ouvrir le menu principal",
+    "navigation": {
+      "home": "Accueil",
+      "about": "À propos",
+      "suno": "Suno"
+    }
   },
   "LocaleSwitch": {
-    "label": "Changer la langue",
-    "locale": "{locale, select, fr {🇫🇷} en {🇺🇸} other {Inconnu}}"
+    "label": "Changer de langue",
+    "locale": "{locale, select, fr {français} en {english} es {español} zh {中文} ja {日本語} ko {한국어} other {Unknown}}"
+  },
+  "PageHeading": {
+    "titleLabel": "Titre",
+    "titlePlaceholder": "Entrez le titre de votre chanson",
+    "sections": "sections",
+    "copiedLyrics": "Paroles copiées",
+    "copiedTags": "Tags copiés",
+    "copyLyrics": "Copier les paroles",
+    "copyTags": "Copier les tags",
+    "download": "Télécharger .txt",
+    "reset": "Réinitialiser",
+    "modal": {
+      "title": "Réinitialiser le projet en cours ?",
+      "description": "Cela effacera les paroles, la structure et les tags actuels. Cette action est irréversible.",
+      "cancel": "Annuler",
+      "confirm": "Réinitialiser"
+    }
+  },
+  "SectionEditor": {
+    "title": "Éditeur de section",
+    "preview": "Aperçu",
+    "type": "Type",
+    "instruction": "Instruction",
+    "instructionPlaceholder": "Solo de violon / Chuchoté / Sans batterie…",
+    "customLabel": "Libellé personnalisé",
+    "customPlaceholder": "Drop / Breakdown / Post-refrain…",
+    "lyrics": "Paroles",
+    "lyricsPlaceholder": "Écrivez les paroles de cette section…",
+    "lines": "lignes",
+    "words": "mots",
+    "clearLyrics": "Effacer les paroles"
+  },
+  "SectionTypePicker": {
+    "intro": "Intro",
+    "verse": "Couplet",
+    "prechorus": "Pré-refrain",
+    "chorus": "Refrain",
+    "bridge": "Pont",
+    "outro": "Outro",
+    "custom": "Personnalisé"
+  },
+  "StructurePanel": {
+    "title": "Structure",
+    "description": "Glisser pour réordonner • Cliquer pour modifier • Dupliquer pour les répétitions",
+    "addSection": "Ajouter une section",
+    "duplicate": "Dupliquer",
+    "delete": "Supprimer"
+  },
+  "StylesPanel": {
+    "title": "Styles",
+    "description": "Ajoutez des tags de style / genre / ambiance. Appuyez sur <enter>Entrée</enter> ou <comma>,</comma> pour ajouter.",
+    "shuffle": "Mélanger",
+    "shuffleLabel": "Suggestions aléatoires",
+    "comboPlaceholder": "intéressant, basses, rock suédois, captivant…",
+    "noTags": "Aucun tag pour l’instant."
+  },
+  "VoicePanel": {
+    "title": "Voix",
+    "description": "Configuration vocale : genre + tags descriptifs de voix.",
+    "gender": "Genre vocal",
+    "comboLabel": "Tags de voix",
+    "comboPlaceholder": "chaude, soufflée, intime, légère réverb…",
+    "noTags": "Aucun tag pour l’instant."
   },
   "ThemeToggle": {
-    "label": "Changer le thème",
-    "light": "Lumineux",
+    "label": "Changer de thème",
+    "light": "Clair",
     "dark": "Sombre"
   }
 }

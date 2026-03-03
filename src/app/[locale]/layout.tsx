@@ -1,14 +1,24 @@
-import "@/app/globals.css";
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { routing } from "../../i18n/routing";
-import { hasLocale } from "next-intl";
-import Providers from "../providers";
+import '@/app/globals.css';
+import type { Metadata } from 'next';
+import Providers from '../providers';
+import { hasLocale } from 'next-intl';
+import { notFound } from 'next/navigation';
+import { routing } from '../../i18n/routing';
+import { Inter, Hanken_Grotesk } from 'next/font/google';
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+});
+const hankenGrotesk = Hanken_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-hanken-grotesk',
+});
 
 export const metadata: Metadata = {
-  title: "Next.js Craft Template",
+  title: 'SunoPromptBuilder',
   description:
-    "A template for Next.js projects that include Next-Auth, Next-Intl and TailwindCSS",
+    'SunoPromptBuilder is a tool designed to help you create and manage prompts for Suno. It provides an intuitive interface for crafting effective prompts.',
 };
 
 export default async function LocaleLayout({
@@ -33,7 +43,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body>
+      <body className={`antialiased ${inter.variable} ${hankenGrotesk.variable}`}>
         <Providers locale={locale} messages={messages}>
           {children}
         </Providers>

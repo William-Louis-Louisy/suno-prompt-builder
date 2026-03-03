@@ -1,39 +1,44 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-alternative: var(--alternative);
   --color-element: var(--element);
+  --color-accent: var(--accent);
+  --color-warning: var(--warning);
   --color-moon: var(--moon);
   --color-sun: var(--sun);
   --spacing-header: var(--header-h);
   --spacing-page: var(--page-min-h);
+  --font-inter: var(--font-inter);
+  --font-hanken-grotesk: var(--font-hanken-grotesk);
 }
 
 :root {
-  --background: oklch(94.61% 0 0);
-  --foreground: oklch(14.48% 0 0);
-  --alternative: oklch(34.48% 0 0);
-  --element: oklch(84.52% 0 0);
+  --background: oklch(94% 0 0);
+  --foreground: oklch(14% 0 0);
+  --alternative: oklch(74% 0 0);
+  --element: oklch(84% 0 0);
+  --accent: oklch(0.74 0.17 51.44);
   --header-h: 4rem;
   --page-min-h: calc(100dvh - var(--header-h));
 }
 
-html[data-theme="dark"] {
-  --background: oklch(14.48% 0 0);
-  --foreground: oklch(94.61% 0 0);
-  --alternative: oklch(74.61% 0 0);
-  --element: oklch(24.78% 0 0);
+html[data-theme='dark'] {
+  --background: oklch(14% 0 0);
+  --foreground: oklch(94% 0 0);
+  --alternative: oklch(34% 0 0);
+  --element: oklch(24% 0 0);
 
   color-scheme: dark;
 }
 
-html[data-theme="light"] {
-  --background: oklch(94.61% 0 0);
-  --foreground: oklch(14.48% 0 0);
-  --alternative: oklch(34.48% 0 0);
-  --element: oklch(84.52% 0 0);
+html[data-theme='light'] {
+  --background: oklch(94% 0 0);
+  --foreground: oklch(14% 0 0);
+  --alternative: oklch(74% 0 0);
+  --element: oklch(84% 0 0);
 }
 
 @layer base {
@@ -64,4 +69,8 @@ a {
 
 h1 {
   @apply text-4xl font-bold tracking-tight sm:text-6xl;
+}
+
+.section {
+  @apply border-foreground/10 bg-background md:shadow-alternative/30 border-y py-4 md:rounded-2xl md:border md:p-4 md:shadow-sm;
 }

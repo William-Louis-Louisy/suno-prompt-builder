@@ -6,31 +6,38 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "format": "prettier \"src/**/*.{js,jsx,ts,tsx,css,mdx}\" --write"
   },
   "dependencies": {
-    "@headlessui/react": "^2.2.0",
-    "@phosphor-icons/react": "^2.1.7",
-    "@tailwindcss/postcss": "^4.0.17",
-    "next": "16.0.4",
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@headlessui/react": "^2.2.9",
+    "@phosphor-icons/react": "^2.1.10",
+    "@tailwindcss/postcss": "^4.2.1",
+    "next": "16.1.6",
     "next-auth": "^4.24.13",
-    "next-intl": "^4.5.5",
+    "next-intl": "^4.8.3",
     "next-themes": "^0.4.6",
-    "postcss": "^8.5.3",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
-    "tailwindcss": "^4.0.17"
+    "postcss": "^8.5.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "tailwindcss": "^4.2.1",
+    "zustand": "^5.0.11"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "19.2.7",
+    "@types/node": "^25",
+    "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
-    "eslint": "^9",
-    "eslint-config-next": "16.0.4",
+    "eslint": "^10",
+    "eslint-config-next": "16.1.6",
+    "prettier": "^3.8.1",
+    "prettier-plugin-tailwindcss": "^0.7.2",
     "typescript": "^5"
   },
   "overrides": {
-    "@types/react": "19.2.7",
+    "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3"
   }
 }

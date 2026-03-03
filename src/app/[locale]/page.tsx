@@ -1,12 +1,32 @@
-import MaxWidthWrapper from "@/components/commons/MaxWidthWrapper";
-import { useTranslations } from "next-intl";
+import { useTranslations } from 'next-intl';
+import VoicePanel from '@/components/panels/VoicePanel';
+import ExportPanel from '@/components/export/ExportPanel';
+import StylesPanel from '@/components/panels/StylesPanel';
+import PageHeading from '@/components/commons/PageHeading';
+import StructurePanel from '@/components/structure/StructurePanel';
+import MaxWidthWrapper from '@/components/commons/MaxWidthWrapper';
+import SectionEditor from '@/components/section-editor/SectionEditor';
+import { AdvancedOptionsPanel } from '@/components/panels/AdvancedOptionsPanel';
 
 export default function HomePage() {
-  const t = useTranslations("HomePage");
+  const t = useTranslations('HomePage');
   return (
-    <MaxWidthWrapper className="flex flex-col items-center gap-8 mt-16 py-12">
-      <h1>{t("title")}</h1>
-      <p>{t("description")}</p>
+    <MaxWidthWrapper className="mt-16 flex flex-col items-center gap-8 pt-6 pb-12">
+      <div className="space-y-6">
+        <PageHeading />
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <StructurePanel />
+          <SectionEditor />
+          <div className="space-y-6">
+            <StylesPanel />
+            <VoicePanel />
+            {/* <AdvancedOptionsPanel /> */}
+          </div>
+        </div>
+
+        <ExportPanel />
+      </div>
     </MaxWidthWrapper>
   );
 }

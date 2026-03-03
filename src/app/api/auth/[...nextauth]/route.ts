@@ -1,6 +1,6 @@
-import NextAuth from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import { NextAuthOptions } from "next-auth";
+import NextAuth from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google';
+import { NextAuthOptions } from 'next-auth';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -15,10 +15,8 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         // By default, the user's role is "user"
         const isAdmin =
-          user.email &&
-          process.env.ADMIN_EMAIL &&
-          user.email === process.env.ADMIN_EMAIL;
-        token.role = isAdmin ? "ADMIN" : "user";
+          user.email && process.env.ADMIN_EMAIL && user.email === process.env.ADMIN_EMAIL;
+        token.role = isAdmin ? 'ADMIN' : 'user';
       }
       return token;
     },

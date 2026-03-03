@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-import { Moon, Sun } from "@phosphor-icons/react";
-import { useTranslations } from "next-intl";
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
+import { Moon, Sun } from '@phosphor-icons/react';
+import { useTranslations } from 'next-intl';
 
 export default function ThemeToggle() {
-  const t = useTranslations("ThemeToggle");
+  const t = useTranslations('ThemeToggle');
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -16,17 +16,17 @@ export default function ThemeToggle() {
   if (!mounted) return null;
 
   const toggleTheme = () => {
-    setTheme(resolvedTheme === "light" ? "dark" : "light");
+    setTheme(resolvedTheme === 'light' ? 'dark' : 'light');
   };
 
   return (
     <button
-      className="cursor-pointer bg-element rounded-full p-2"
+      className="bg-element cursor-pointer rounded-full p-2"
       onClick={toggleTheme}
-      aria-label={t("label")}
-      title={resolvedTheme === "dark" ? t("light") : t("dark")}
+      aria-label={t('label')}
+      title={resolvedTheme === 'dark' ? t('light') : t('dark')}
     >
-      {resolvedTheme === "dark" ? (
+      {resolvedTheme === 'dark' ? (
         <Sun size={20} weight="bold" />
       ) : (
         <Moon size={20} weight="bold" />
