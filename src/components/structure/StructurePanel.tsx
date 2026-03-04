@@ -4,7 +4,8 @@ import {
   useSensor,
   useSensors,
   DndContext,
-  PointerSensor,
+  MouseSensor,
+  TouchSensor,
   closestCenter,
   KeyboardSensor,
   type DragEndEvent,
@@ -25,6 +26,7 @@ import { AddSectionTypePicker } from './AddSectionTypePicker';
 export default function StructurePanel() {
   const t = useTranslations('StructurePanel');
   const [nextType, setNextType] = useState<SectionType>('verse');
+
   const sections = useSongStore((s) => s.sections);
   const activeSectionId = useSongStore((s) => s.activeSectionId);
   const setActiveSection = useSongStore((s) => s.setActiveSection);
@@ -34,13 +36,25 @@ export default function StructurePanel() {
   const reorderSections = useSongStore((s) => s.reorderSections);
 
   const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
-    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
+    useSensor(MouseSensor, {
+      activationConstraint: { distance: 6 },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 180,
+        tolerance: 8,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
   );
 
   const labels = useMemo(() => {
     const m = new Map<string, string>();
-    for (const sec of sections) m.set(sec.id, formatSectionTag(sec, sections));
+    for (const sec of sections) {
+      m.set(sec.id, formatSectionTag(sec, sections));
+    }
     return m;
   }, [sections]);
 
@@ -81,8 +95,8 @@ export default function StructurePanel() {
       <div className="mt-3 grid grid-cols-3 gap-2">
         <button
           type="button"
-          onClick={() => addSection('verse')}
-          className="border-foreground/10 bg-element text-foreground/90 hover:bg-element/90 focus:ring-accent/50 col-span-2 flex-1 rounded-xl border px-3 py-2 text-xs focus:ring-2 focus:outline-none"
+          onClick={() => addSection(nextType)}
+          className="border-foreground/10 bg-element text-foreground/90 hover:bg-element/90 focus:ring-accent/50 col-span-2 rounded-xl border px-3 py-2 text-xs focus:ring-2 focus:outline-none"
         >
           {t('addSection')}
         </button>

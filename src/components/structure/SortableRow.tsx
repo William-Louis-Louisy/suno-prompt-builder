@@ -44,7 +44,7 @@ export default function SortableRow({
       <button
         type="button"
         className={cn(
-          'text-foreground/60 hover:text-foreground/85 cursor-grab rounded-lg select-none',
+          'text-foreground/60 hover:text-foreground/85 cursor-grab touch-none rounded-lg select-none',
           'focus:ring-accent/50 focus:ring-2 focus:outline-none active:cursor-grabbing',
         )}
         aria-label="Drag handle"
@@ -66,7 +66,12 @@ export default function SortableRow({
         {label}
       </button>
 
-      <div className="flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+      <div
+        className={cn(
+          'flex items-center gap-1 transition-opacity',
+          isActive ? 'opacity-100' : 'hidden md:flex md:opacity-0 md:group-hover:opacity-100',
+        )}
+      >
         <button
           type="button"
           onClick={onDuplicate}
