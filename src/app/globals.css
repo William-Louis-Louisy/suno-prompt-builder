@@ -6,7 +6,7 @@
   --color-alternative: var(--alternative);
   --color-element: var(--element);
   --color-accent: var(--accent);
-  --color-warning: var(--warning);
+  --color-accent-alt: var(--accent-alt);
   --color-moon: var(--moon);
   --color-sun: var(--sun);
   --spacing-header: var(--header-h);
@@ -21,6 +21,7 @@
   --alternative: oklch(74% 0 0);
   --element: oklch(84% 0 0);
   --accent: oklch(0.74 0.17 51.44);
+  --accent-alt: oklch(0.66 0.22 29.58);
   --header-h: 4rem;
   --page-min-h: calc(100dvh - var(--header-h));
 }

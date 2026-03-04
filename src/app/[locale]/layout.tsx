@@ -1,9 +1,9 @@
 import '@/app/globals.css';
-import type { Metadata } from 'next';
 import Providers from '../providers';
 import { hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '../../i18n/routing';
+import type { Metadata, Viewport } from 'next';
 import { Inter, Hanken_Grotesk } from 'next/font/google';
 
 const inter = Inter({
@@ -15,10 +15,18 @@ const hankenGrotesk = Hanken_Grotesk({
   variable: '--font-hanken-grotesk',
 });
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ebebeb' },
+    { media: '(prefers-color-scheme: dark)', color: '#090909' },
+  ],
+  colorScheme: 'light dark',
+};
+
 export const metadata: Metadata = {
-  title: 'SunoPromptBuilder',
+  title: 'Suno-Prompt-Builder',
   description:
-    'SunoPromptBuilder is a tool designed to help you create and manage prompts for Suno. It provides an intuitive interface for crafting effective prompts.',
+    'Suno-Prompt-Builder is a tool designed to help you create and manage prompts for Suno. It provides an intuitive interface for crafting effective prompts.',
 };
 
 export default async function LocaleLayout({
