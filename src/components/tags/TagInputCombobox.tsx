@@ -82,11 +82,17 @@ export default function TagInputCombobox({
         <div className="relative">
           <ComboboxInput
             value={query}
+            enterKeyHint="done"
+            autoComplete="off"
+            autoCorrect="off"
+            spellCheck={false}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ',') {
                 e.preventDefault();
+                e.stopPropagation();
                 commit(query);
+                return;
               }
 
               if (e.key === 'Backspace' && query.length === 0 && normalizedValue.length > 0) {

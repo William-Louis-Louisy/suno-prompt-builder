@@ -59,7 +59,7 @@ export default function SortableRow({
         onClick={onSelect}
         className={cn(
           'text-foreground/90 flex-1 text-left font-mono text-[13px] leading-5',
-          'rounded-lg',
+          'truncate rounded-lg',
         )}
         aria-label="Select section"
       >
