@@ -75,3 +75,23 @@ h1 {
 .section {
   @apply border-foreground/10 bg-background md:shadow-alternative/30 border-y py-4 md:rounded-2xl md:border md:p-4 md:shadow-sm;
 }
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+}

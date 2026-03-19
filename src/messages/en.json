@@ -38,7 +38,13 @@
       }
     }
   },
-
+  "ArtistsPanel": {
+    "title": "Artist presets",
+    "description": "Pick an artist to apply a preset (Style + Voice tags). You can still add your own tags afterward.",
+    "searchPlaceholder": "Search an artist…",
+    "noResults": "No results.",
+    "clear": "Clear preset"
+  },
   "ExportBlock": {
     "empty": "Empty.",
     "copy": "Copy",
@@ -134,19 +140,21 @@
   },
   "StylesPanel": {
     "title": "Styles",
-    "description": "Add style / genre / mood tags. Press <enter>Enter</enter> or <comma>,</comma> to add.",
+    "description": "Add tags related to artist styles. Press <enter>Enter</enter> or <comma>,</comma> to add.",
+    "enter": "Enter",
+    "comma": ",",
     "shuffle": "Shuffle",
-    "shuffleLabel": "Random suggestions",
-    "comboPlaceholder": "interesting, bass guitars, swedish rock, captivating…",
+    "comboLabel": "Your tags",
     "noTags": "No tags yet."
   },
   "VoicePanel": {
     "title": "Voice",
-    "description": "Voice setup: gender + descriptive voice tags.",
-    "gender": "Vocal Gender",
-    "comboLabel": "Voice tags",
-    "comboPlaceholder": "warm, breathy, intimate, light reverb…",
-    "noTags": "No tags yet."
+    "description": "Set vocal gender and add tags describing vocal texture.",
+    "gender": "Vocal gender",
+    "comboLabel": "Your tags",
+    "noTags": "No tags yet.",
+    "autoHint": "Auto from artist: {gender}.",
+    "autoHintNone": "Auto: no gender detected from artist."
   },
   "ThemeToggle": {
     "label": "Toggle theme",

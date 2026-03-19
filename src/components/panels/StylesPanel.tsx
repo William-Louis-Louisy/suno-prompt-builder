@@ -1,4 +1,5 @@
 'use client';
+
 import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
@@ -7,17 +8,37 @@ import { ShuffleIcon } from '@phosphor-icons/react';
 import TagInputCombobox from '../tags/TagInputCombobox';
 import { STYLE_SUGGESTIONS } from '@/lib/suggestions/styles';
 
+function mergeUnique(a: string[], b: string[]) {
+  const out: string[] = [];
+  const seen = new Set<string>();
+  for (const t of [...a, ...b]) {
+    const k = t.toLowerCase();
+    if (!seen.has(k)) {
+      seen.add(k);
+      out.push(t);
+    }
+  }
+  return out;
+}
+
 export default function StylesPanel() {
   const t = useTranslations('StylesPanel');
-  const styles = useSongStore((s) => s.meta.styles);
+
+  const meta = useSongStore((s) => s.meta);
   const addStyleTag = useSongStore((s) => s.addStyleTag);
   const removeStyleTag = useSongStore((s) => s.removeStyleTag);
+
+  const allStyles = React.useMemo(
+    () => mergeUnique(meta.artistStyles, meta.manualStyles),
+    [meta.artistStyles, meta.manualStyles],
+  );
 
   function shuffleFill() {
     const picks = [...STYLE_SUGGESTIONS].sort(() => Math.random() - 0.5).slice(0, 4);
 
-    picks.forEach((t) => addStyleTag(t));
+    picks.forEach((tag) => addStyleTag(tag));
   }
+
   return (
     <section className="section">
       <header className="mb-3 flex items-start justify-between gap-3">
@@ -48,7 +69,8 @@ export default function StylesPanel() {
       </header>
 
       <TagInputCombobox
-        value={styles}
+        value={meta.manualStyles}
+        taken={allStyles}
         suggestions={[...STYLE_SUGGESTIONS]}
         onAdd={addStyleTag}
         onRemove={removeStyleTag}

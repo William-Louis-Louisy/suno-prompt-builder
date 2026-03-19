@@ -3,6 +3,7 @@ import VoicePanel from '@/components/panels/VoicePanel';
 import ExportPanel from '@/components/export/ExportPanel';
 import StylesPanel from '@/components/panels/StylesPanel';
 import PageHeading from '@/components/commons/PageHeading';
+import ArtistsPanel from '@/components/artists/ArtistsPanel';
 import StructurePanel from '@/components/structure/StructurePanel';
 import MaxWidthWrapper from '@/components/commons/MaxWidthWrapper';
 import SectionEditor from '@/components/section-editor/SectionEditor';
@@ -15,14 +16,15 @@ export default function HomePage() {
       <div className="space-y-6">
         <PageHeading />
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <StructurePanel />
           <SectionEditor />
-          <div className="space-y-6">
-            <StylesPanel />
-            <VoicePanel />
-            {/* <AdvancedOptionsPanel /> */}
-          </div>
+        </div>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <StylesPanel />
+          <VoicePanel />
+          <ArtistsPanel />
+          {/* <AdvancedOptionsPanel /> */}
         </div>
 
         <ExportPanel />

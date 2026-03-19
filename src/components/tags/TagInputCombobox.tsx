@@ -1,3 +1,4 @@
+// TagInputCombobox.tsx
 'use client';
 
 import * as React from 'react';
@@ -9,6 +10,8 @@ type Props = {
   label?: string;
   placeholder?: string;
   value: string[];
+  /** Optional: list of tags that should be considered "already taken" (e.g. artist + manual merged) */
+  taken?: string[];
   suggestions: string[];
   onAdd: (tag: string) => void;
   onRemove: (tag: string) => void;
@@ -28,6 +31,7 @@ export default function TagInputCombobox({
   label,
   placeholder = 'Add a tag…',
   value,
+  taken,
   suggestions,
   onAdd,
   onRemove,
@@ -35,15 +39,21 @@ export default function TagInputCombobox({
   noTags = 'No tags yet.',
 }: Props) {
   const [query, setQuery] = React.useState('');
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
 
   const normalizedValue = React.useMemo(
     () => value.map((v) => normalizeTag(v)).filter(Boolean),
     [value],
   );
 
+  const takenNormalized = React.useMemo(() => {
+    const src = taken && taken.length ? taken : normalizedValue;
+    return src.map((v) => normalizeTag(v)).filter(Boolean);
+  }, [taken, normalizedValue]);
+
   const filteredSuggestions = React.useMemo(() => {
     const q = normalizeTag(query);
-    const already = new Set(normalizedValue.map((t) => t.toLowerCase()));
+    const already = new Set(takenNormalized.map((t) => t.toLowerCase()));
 
     const base = suggestions
       .map((s) => normalizeTag(s))
@@ -53,7 +63,7 @@ export default function TagInputCombobox({
     if (!q) return base.slice(0, 12);
 
     return base.filter((s) => startsWithCI(s, q)).slice(0, 12);
-  }, [query, suggestions, normalizedValue]);
+  }, [query, suggestions, takenNormalized]);
 
   function commit(raw: string) {
     const tag = normalizeTag(raw);
@@ -61,6 +71,10 @@ export default function TagInputCombobox({
 
     onAdd(tag);
     setQuery('');
+
+    requestAnimationFrame(() => {
+      inputRef.current?.focus({ preventScroll: true });
+    });
   }
 
   return (
@@ -70,23 +84,20 @@ export default function TagInputCombobox({
       <Combobox<string | null>
         value={query}
         onChange={(selected) => {
-          if (!selected) {
-            setQuery('');
-            return;
-          }
-
+          if (!selected) return;
           commit(selected);
         }}
         disabled={disabled}
       >
         <div className="relative">
           <ComboboxInput
+            ref={inputRef}
             value={query}
+            onChange={(e) => setQuery(e.target.value)}
             enterKeyHint="done"
             autoComplete="off"
             autoCorrect="off"
             spellCheck={false}
-            onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ',') {
                 e.preventDefault();

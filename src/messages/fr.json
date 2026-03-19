@@ -38,6 +38,13 @@
       }
     }
   },
+  "ArtistsPanel": {
+    "title": "Presets d’artistes",
+    "description": "Choisissez un artiste pour appliquer un preset (tags Style + Voix). Vous pouvez ensuite ajouter vos propres tags.",
+    "searchPlaceholder": "Rechercher un artiste…",
+    "noResults": "Aucun résultat.",
+    "clear": "Retirer le preset"
+  },
   "ExportBlock": {
     "empty": "Vide.",
     "copy": "Copier",
@@ -57,13 +64,11 @@
     "ctrlC": "Sélectionnez le texte ci-dessous puis appuyez sur Ctrl/Cmd+C.",
     "close": "Fermer"
   },
-
   "FooterNavigation": {
     "about": "À propos",
     "suno": "Suno",
     "wiki": "Wiki"
   },
-
   "HomePage": {
     "title": "Template Craft Next.js",
     "description": "Un template pour projets Next.js avec Next-Auth, Next-Intl et TailwindCSS"
@@ -133,19 +138,21 @@
   },
   "StylesPanel": {
     "title": "Styles",
-    "description": "Ajoutez des tags de style / genre / ambiance. Appuyez sur <enter>Entrée</enter> ou <comma>,</comma> pour ajouter.",
-    "shuffle": "Mélanger",
-    "shuffleLabel": "Suggestions aléatoires",
-    "comboPlaceholder": "intéressant, basses, rock suédois, captivant…",
-    "noTags": "Aucun tag pour l’instant."
+    "description": "Ajoutez des tags liés aux styles d'artistes. Appuyez sur <enter>Entrée</enter> ou <comma>,</comma> pour ajouter.",
+    "enter": "Entrée",
+    "comma": ",",
+    "shuffle": "Aléatoire",
+    "comboLabel": "Vos tags",
+    "noTags": "Aucun tag pour le moment."
   },
   "VoicePanel": {
     "title": "Voix",
-    "description": "Configuration vocale : genre + tags descriptifs de voix.",
+    "description": "Définissez le genre vocal et ajoutez des tags décrivant la texture de la voix.",
     "gender": "Genre vocal",
-    "comboLabel": "Tags de voix",
-    "comboPlaceholder": "chaude, soufflée, intime, légère réverb…",
-    "noTags": "Aucun tag pour l’instant."
+    "comboLabel": "Vos tags",
+    "noTags": "Aucun tag pour le moment.",
+    "autoHint": "Auto depuis l’artiste : {gender}.",
+    "autoHintNone": "Auto : aucun genre détecté depuis l’artiste."
   },
   "ThemeToggle": {
     "label": "Changer de thème",

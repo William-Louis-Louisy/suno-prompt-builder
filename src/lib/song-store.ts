@@ -4,7 +4,7 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
 import { uid } from './id';
-import type { SectionType, SongSection, SongState } from './song-types';
+import type { SectionType, SongSection, SongState, VocalGender } from './song-types';
 
 type SongActions = {
   setTitle: (title: string) => void;
@@ -20,14 +20,21 @@ type SongActions = {
 
   setSectionType: (id: string, type: SectionType) => void;
 
+  // MANUAL tags
   addStyleTag: (tag: string) => void;
   removeStyleTag: (tag: string) => void;
-
-  setVocalGender: (g: SongState['meta']['vocalGender']) => void;
 
   addVoiceTag: (tag: string) => void;
   removeVoiceTag: (tag: string) => void;
 
+  // ARTIST preset
+  applyArtistPreset: (artist: { id: string; tags: string[] }) => void;
+  clearArtistPreset: () => void;
+
+  // Gender
+  setVocalGenderOverride: (value: VocalGender | null) => void;
+
+  // (Optional - currently unused in UI, kept for later)
   addExcludeStyle: (tag: string) => void;
   removeExcludeStyle: (tag: string) => void;
   setConstraintsNotes: (notes: string) => void;
@@ -48,17 +55,33 @@ function buildInitialState(): SongState {
     sections: secs,
     activeSectionId: secs[0]!.id,
     meta: {
-      styles: [],
-      voiceTags: [],
-      vocalGender: 'unspecified',
+      manualStyles: [],
+      manualVoiceTags: [],
+      vocalGenderOverride: null,
+
+      selectedArtistId: null,
+      artistStyles: [],
+      artistVoiceTags: [],
+      artistVocalGender: null,
+
       excludeStyles: [],
       constraintsNotes: '',
     },
   };
 }
 
-function normalizeTag(tag: string) {
-  return tag.trim().replace(/\s+/g, ' ');
+function normalizeTag(raw: string) {
+  return raw.trim().replace(/\s+/g, ' ');
+}
+
+function isVoiceTag(tag: string) {
+  return /\bvocals?\b/i.test(tag);
+}
+
+function detectGender(tag: string): 'male' | 'female' | null {
+  if (/\bfemale vocals\b/i.test(tag)) return 'female';
+  if (/\bmale vocals\b/i.test(tag)) return 'male';
+  return null;
 }
 
 function uniquePush(list: string[], tag: string) {
@@ -75,7 +98,7 @@ function uniqueRemove(list: string[], tag: string) {
 
 export const useSongStore = create<SongState & SongActions>()(
   persist(
-    (set, get) => {
+    (set) => {
       const initialState = buildInitialState();
 
       return {
@@ -155,26 +178,78 @@ export const useSongStore = create<SongState & SongActions>()(
             }),
           })),
 
+        // MANUAL styles
         addStyleTag: (tag) =>
           set((s) => ({
-            meta: { ...s.meta, styles: uniquePush(s.meta.styles, tag) },
+            meta: { ...s.meta, manualStyles: uniquePush(s.meta.manualStyles, tag) },
           })),
         removeStyleTag: (tag) =>
           set((s) => ({
-            meta: { ...s.meta, styles: uniqueRemove(s.meta.styles, tag) },
+            meta: { ...s.meta, manualStyles: uniqueRemove(s.meta.manualStyles, tag) },
           })),
 
-        setVocalGender: (g) => set((s) => ({ meta: { ...s.meta, vocalGender: g } })),
-
+        // MANUAL voice tags
         addVoiceTag: (tag) =>
           set((s) => ({
-            meta: { ...s.meta, voiceTags: uniquePush(s.meta.voiceTags, tag) },
+            meta: { ...s.meta, manualVoiceTags: uniquePush(s.meta.manualVoiceTags, tag) },
           })),
         removeVoiceTag: (tag) =>
           set((s) => ({
-            meta: { ...s.meta, voiceTags: uniqueRemove(s.meta.voiceTags, tag) },
+            meta: { ...s.meta, manualVoiceTags: uniqueRemove(s.meta.manualVoiceTags, tag) },
           })),
 
+        // ARTIST preset (replaces only artist* fields, preserves manual* fields)
+        applyArtistPreset: (artist) =>
+          set((s) => {
+            const artistStyles: string[] = [];
+            const artistVoiceTags: string[] = [];
+            let artistVocalGender: VocalGender | null = null;
+
+            for (const raw of artist.tags) {
+              const tag = normalizeTag(raw);
+              if (!tag) continue;
+
+              const g = detectGender(tag);
+              if (g) artistVocalGender = g;
+
+              if (isVoiceTag(tag)) {
+                if (!artistVoiceTags.some((x) => x.toLowerCase() === tag.toLowerCase())) {
+                  artistVoiceTags.push(tag);
+                }
+              } else {
+                if (!artistStyles.some((x) => x.toLowerCase() === tag.toLowerCase())) {
+                  artistStyles.push(tag);
+                }
+              }
+            }
+
+            return {
+              meta: {
+                ...s.meta,
+                selectedArtistId: artist.id,
+                artistStyles,
+                artistVoiceTags,
+                artistVocalGender,
+              },
+            };
+          }),
+
+        clearArtistPreset: () =>
+          set((s) => ({
+            meta: {
+              ...s.meta,
+              selectedArtistId: null,
+              artistStyles: [],
+              artistVoiceTags: [],
+              artistVocalGender: null,
+            },
+          })),
+
+        // Gender override (null = auto)
+        setVocalGenderOverride: (value) =>
+          set((s) => ({ meta: { ...s.meta, vocalGenderOverride: value } })),
+
+        // Optional fields for later
         addExcludeStyle: (tag) =>
           set((s) => ({
             meta: {
@@ -189,7 +264,6 @@ export const useSongStore = create<SongState & SongActions>()(
               excludeStyles: uniqueRemove(s.meta.excludeStyles, tag),
             },
           })),
-
         setConstraintsNotes: (notes) =>
           set((s) => ({ meta: { ...s.meta, constraintsNotes: notes } })),
 
@@ -198,7 +272,7 @@ export const useSongStore = create<SongState & SongActions>()(
     },
     {
       name: 'suno-prompt-builder.current',
-      version: 1,
+      version: 2,
       storage: createJSONStorage(() => localStorage),
       partialize: (s) => ({
         title: s.title,
@@ -206,6 +280,30 @@ export const useSongStore = create<SongState & SongActions>()(
         activeSectionId: s.activeSectionId,
         meta: s.meta,
       }),
+      migrate: (persisted: any, fromVersion: number) => {
+        if (fromVersion === 1 && persisted?.meta) {
+          const old = persisted.meta;
+
+          return {
+            ...persisted,
+            meta: {
+              manualStyles: old.styles ?? [],
+              manualVoiceTags: old.voiceTags ?? [],
+              vocalGenderOverride: null,
+
+              selectedArtistId: null,
+              artistStyles: [],
+              artistVoiceTags: [],
+              artistVocalGender: null,
+
+              excludeStyles: old.excludeStyles ?? [],
+              constraintsNotes: old.constraintsNotes ?? '',
+            },
+          };
+        }
+
+        return persisted;
+      },
     },
   ),
 );

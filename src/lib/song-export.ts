@@ -9,6 +9,19 @@ const TYPE_LABEL: Record<Exclude<SectionType, 'custom'>, string> = {
   outro: 'Outro',
 };
 
+function mergeUnique(a: string[], b: string[]) {
+  const out: string[] = [];
+  const seen = new Set<string>();
+  for (const t of [...a, ...b]) {
+    const k = t.toLowerCase();
+    if (!seen.has(k)) {
+      seen.add(k);
+      out.push(t);
+    }
+  }
+  return out;
+}
+
 function computeSectionLabel(section: SongSection, order: SongSection[]): string {
   const base =
     section.type === 'custom' ? section.customLabel.trim() || 'Custom' : TYPE_LABEL[section.type];
@@ -43,17 +56,15 @@ export function buildStructuredLyrics(sections: SongSection[]): string {
 }
 
 export function buildTagsText(meta: SongMeta): string {
-  const styles = meta.styles;
-  const voice = meta.voiceTags;
+  const styles = mergeUnique(meta.artistStyles, meta.manualStyles);
+  const voice = mergeUnique(meta.artistVoiceTags, meta.manualVoiceTags);
+
+  const gender = meta.vocalGenderOverride ?? meta.artistVocalGender ?? 'unspecified';
 
   const lines: string[] = [];
-
   if (styles.length) lines.push(`Styles: ${styles.join(', ')}`);
   if (voice.length) lines.push(`Voice: ${voice.join(', ')}`);
-
-  if (meta.vocalGender !== 'unspecified') {
-    lines.push(`Vocal gender: ${meta.vocalGender}`);
-  }
+  if (gender !== 'unspecified') lines.push(`Vocal gender: ${gender}`);
 
   return lines.join('\n').trim();
 }

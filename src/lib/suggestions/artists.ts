@@ -1,3 +1,15 @@
+import type { VocalGender } from '@/lib/song-types';
+
+export type ArtistSuggestion = {
+  id: string;
+  artist: string;
+  tags: string[];
+};
+
+export type ArtistSuggestionWithImage = ArtistSuggestion & {
+  image: string;
+};
+
 export const ARTIST_SUGGESTIONS = [
   {
     id: 'drake',
@@ -659,3 +671,18 @@ export const ARTIST_SUGGESTIONS = [
     ],
   },
 ];
+
+export const ARTIST_SUGGESTIONS_WITH_IMAGES = ARTIST_SUGGESTIONS.map((item) => ({
+  ...item,
+  image: `/images/artists/${item.id}.webp`,
+}));
+
+export function isVoiceTag(tag: string) {
+  return /\bvocals?\b/i.test(tag);
+}
+
+export function detectGender(tag: string): VocalGender | null {
+  if (/\bfemale vocals\b/i.test(tag)) return 'female';
+  if (/\bmale vocals\b/i.test(tag)) return 'male';
+  return null;
+}
